@@ -7,6 +7,5 @@ output  c = a & b;
 
 assign s = a ^ b;
 assign c = a & b;
-
 endmodule
 
