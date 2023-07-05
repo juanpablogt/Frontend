@@ -4,8 +4,9 @@ reg a,b,cin;
 wire s,c;
 
 full_adder fa (s,c,a,b,cin);
+
 initial begin
-    
+
     $dumpfile("full_adder.vcd");
     $dumpvars(0,full_adder_testbench);
     $monitor($time," a=%b b=%b cin=%b s=%b c=%b",$time,a,b,cin,s,c);
