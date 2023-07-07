@@ -1,22 +1,27 @@
-let strawberryCount = 0;
 
-while (strawberryCount <25){
-    document.write("There are "+strawberryCount+" strawberries.<br>");
-    strawberryCount++;
+let pets = [
+    {name: 'rex', type: 'dog', age: 10},
+    {name: 'miau', type: 'cat', age: 2},
+    {name: 'gulp', type: 'fish', age: 1},
+
+]
+
+pets.push({name: 'bolinha', type: 'dog', age: 5})
+
+function nameOnly(x){
+    return x.name
 }
 
-let myColors = ["red", "green", "blue", "yellow"];
-
-myColors.forEach(function(color){
-    document.write(color+"<br>");
+function onlyDog(x){
+    return x.type == 'dog'
 }
-);
-let pets = [name="Apolo", type="dog", age=5, name="Luna", type="cat", age=2, name="Kiara", type="dog", age=3];
 
-pets.push(name="Perro", type="cat", age=2);
-
-pets.forEach(function(pet){
-    document.write(pet+"<br>");
+function onlybaby(x){
+    return x.age < 5
 }
-);
 
+let dogs = pets.filter(onlyDog)
+let baby = pets.filter(onlybaby)
+
+document.write(dogs.map(nameOnly)+ '<br>')
+document.write(baby.map(nameOnly)+ '<br>')
