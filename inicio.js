@@ -1,27 +1,24 @@
-
-let pets = [
-    {name: 'rex', type: 'dog', age: 10},
-    {name: 'miau', type: 'cat', age: 2},
-    {name: 'gulp', type: 'fish', age: 1},
-
-]
-
-pets.push({name: 'bolinha', type: 'dog', age: 5})
-
-function nameOnly(x){
-    return x.name
+let MyName = "Pablo"
+function my_function(){
+    document.write("Hallo " + MyName + "<br>"+ "<br>")
 }
+my_function()
+document.write("Are you " + MyName + "? <br>"+ "<br>")
 
-function onlyDog(x){
-    return x.type == 'dog'
+let jhon = {
+    name: "Jhon",
+    surname: "Smith",
+    age: 25,
+    driveCar(){
+        function functionLocal(){
+            console.log(this.name + " " + this.surname + " is driving a car")
+        }
+        console.log(this.name + " " + this.surname + " is driving a car")
+    }
 }
+jhon.driveCar()
 
-function onlybaby(x){
-    return x.age < 5
+function breathe(){
+    console.log(this.name + " " + this.surname + " is breathing")
 }
-
-let dogs = pets.filter(onlyDog)
-let baby = pets.filter(onlybaby)
-
-document.write(dogs.map(nameOnly)+ '<br>')
-document.write(baby.map(nameOnly)+ '<br>')
+breathe.call(jhon)
