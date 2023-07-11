@@ -1,15 +1,15 @@
-let ourform = document.getElementById("our form");
-let ourfield = document.getElementById("our field");
-let ourlist = document.getElementById("our list");
+let ourform = document.getElementById("ourform");
+let ourfield = document.getElementById("ourfield");
+let ourlist = document.getElementById("ourlist");
 
-ourform.addEventListener("submit", () => {
+ourform.addEventListener("submit", (e) => {
     e.preventDefault();
     createItem(ourfield.value);
 });
 
 function createItem(x) {
     let ourHTML = `<li>${x} <button onclick="deleteItem(this)">Delete</button></li>`;
-    ourfield.insertAdjacentHTML("befored", ourHTML);
+    ourlist.insertAdjacentHTML("beforeend", ourHTML);
     ourfield.value = "";
     ourfield.focus();
 }
