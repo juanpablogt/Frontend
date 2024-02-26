@@ -1,0 +1,80 @@
+{
+	"folders": [
+		{
+			"name": "Frontend",
+			"path": "../../Frontend/Frontend/Frontend"
+		},
+		{
+			"name": "Mi_lista_de_compras",
+			"path": "../../Frontend/Frontend/lista de compras/Mi_lista_de_compras"
+		},
+		{
+			"name": "Verilog-1",
+			"path": "../../Verilog/Verilog-1"
+		},
+		{
+			"name": "Django_Presentacion",
+			"path": "../../Django_Presentacion"
+		},
+		{
+			"name": "C_Cpp_Projects",
+			"path": "../../c_c++/C_Cpp_Projects"
+		},
+		{
+			"name": "IA_whit_python",
+			"path": "../../IA_whit_python"
+		},
+		{
+			"name": "Raket",
+			"path": "../../Raket"
+		},
+		{
+			"name": "Arquitectura_de_computadoras",
+			"path": "../../Arquitectura_de_computadoras"
+		},
+		{
+			"name": "Terraform",
+			"path": "../../Terraform/Terraform"
+		},
+		{
+			"name": "juanpablogt",
+			"path": "../../juanpablogt"
+		},
+		{
+			"name": "React",
+			"path": "../../React"
+		},
+		{
+			"name": "HellManagerFrontend",
+			"path": "../../HellManagerFrontend"
+		},
+		{
+			"name": "HellManagerBackend",
+			"path": "../../HellManagerBackend"
+		},
+		{
+			"name": "NODEjs",
+			"path": "../../NODEjs"
+		},
+		{
+			"name": "store",
+			"path": "../../../../../../../wamp64/www/store"
+		},
+		{
+			"name": "Tienda_virtual",
+			"path": "../../../../../../../wamp64/www/Tienda_virtual"
+		},
+		{
+			"name": "Nodejs",
+			"path": "../../Node.js/Nodejs"
+		},
+		{
+			"name": "Time-management-application",
+			"path": "../../Time-management-application"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
