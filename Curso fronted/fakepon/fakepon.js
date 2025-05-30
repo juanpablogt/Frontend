@@ -1,6 +1,17 @@
+let ataquejugador;
+let ataqueEnemy;
+
 function iniciar() {
+    
     let botonMascota = document.getElementById("boton-mascota");
     botonMascota.addEventListener("click", seleccionarMascota);
+
+    let botonFire = document.getElementById("boton-fire");
+    botonFire.addEventListener("click", botonFireClick);
+    let botonWater = document.getElementById("boton-water");
+    botonWater.addEventListener("click", botonWaterClick);
+    let botonGrass = document.getElementById("boton-grass");
+    botonGrass.addEventListener("click", botonGrassClick);
 }
 
 function seleccionarMascota() {
@@ -40,6 +51,45 @@ function seleccionarOponente() {
     else if (ataqueAleatorio == 4) {
         spanMascotaOponente.innerHTML = "Perrito";
     }
+}
+
+function botonFireClick() {
+    ataquejugador = "Fuego";
+    ataquealeaEnemy();
+}
+function botonWaterClick() {
+    ataquejugador = "Agua";
+    ataquealeaEnemy();
+}
+function botonGrassClick() {
+    ataquejugador = "Planta";
+    ataquealeaEnemy();
+}
+
+function ataquealeaEnemy() {
+    let ataqueAleatorio = aleatorio(1, 3);
+    if (ataqueAleatorio == 1) {
+        ataqueEnemy = "Fuego";
+
+    }
+    else if (ataqueAleatorio == 2) {
+        ataqueEnemy = "Agua";
+    }
+    else if (ataqueAleatorio == 3) {
+        ataqueEnemy = "Planta";
+    }
+    else {
+        ataqueEnemy = "Error";
+    }
+
+    createMensaje();
+}
+
+function createMensaje() {
+    let sectionMensajes = document.getElementById("mensajes");
+    let parrafo = document.createElement("p")
+    parrafo.innerHTML = "Tu mascota ataca con " + ataquejugador + ", la mascota enemiga ataca con " + ataqueEnemy;
+    sectionMensajes.appendChild(parrafo);
 }
 
 function aleatorio(min, max) {
