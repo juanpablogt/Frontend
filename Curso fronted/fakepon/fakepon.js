@@ -86,14 +86,10 @@ function ataquealeaEnemy() {
         ataqueEnemy = "Error";
     }
 
-    createMensaje();
-}
-
-function createMensaje() {
-    let sectionMensajes = document.getElementById("mensajes");
-    sectionMensajes.innerHTML = "Tu ataque: " + ataquejugador + "<br> Ataque enemigo: " + ataqueEnemy;
     combate();
 }
+
+
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
