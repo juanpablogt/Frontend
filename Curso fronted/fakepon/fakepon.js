@@ -5,6 +5,11 @@ let vidasOponente = 3;
 
 function iniciar() {
 
+    let setionReinicio = document.getElementById("reinicio");
+    setionReinicio.style.display = "none";
+    let setionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+    setionSeleccionarAtaque.style.display = "none";
+
     let botonMascota = document.getElementById("boton-mascota");
     botonMascota.addEventListener("click", seleccionarMascota);
 
@@ -19,6 +24,12 @@ function iniciar() {
 }
 
 function seleccionarMascota() {
+    let sectionSeleccionaAtaque = document.getElementById("seleccionar-ataque");
+    sectionSeleccionaAtaque.style.display = "block";
+
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
+    sectionSeleccionarMascota.style.display = "none";
+
     let inputhipop = document.getElementById("hipop");
     let inputtortugon = document.getElementById("tortugon");
     let inputpajarito = document.getElementById("pajarito");
@@ -144,5 +155,11 @@ function resetearJuego() {
     let spanVidasOponente = document.getElementById("vidas-enemy");
     sapanVidasJugador.innerHTML = vidasJugador;
     spanVidasOponente.innerHTML = vidasOponente;
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+    sectionSeleccionarAtaque.style.display = "none";
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
+    sectionSeleccionarMascota.style.display = "block";
+    let spanMascotaJugador = document.getElementById("mascota-jugador");
+    let spanMascotaOponente = document.getElementById("mascota-enemy");
 }
 window.addEventListener("load", iniciar);

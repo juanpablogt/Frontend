@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kapakana:wght@300..400&display=swap');
+
+body {
+    font-family: 'fredoka one', cursive;
+    background-color: #5409DA;
+}
+
+#seleccionar-mascota{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#5409DA
+}
+
+.tarjeta-de-mascota {
+    width: 144px;
+    height: 100px;
+    background: #BBFBFF;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 2px solid 4E71FF;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjetas{
+display: flex;
+gap: 10px;
+}
+
+input{
+    display: none;
+}
+
+.subtitulo {
+    font-size: 20px;
+    
+}
+
+.titulo {
+    text-align: center;
+    color:#d44141FF;
+    font-size: 80px;
+    margin: 44px;
+}
+
+.tarjeta-de-mascota img {
+    width: 70px;
+}
+
+#boton-mascota {
+    width: 200px;
+    height: 50px;
+    background-color: #BBFBFF;
+    border-radius: 20px;
+    border: 2px solid #db3838;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 61px;
+    font-family: fredoka one, cursive;
+}

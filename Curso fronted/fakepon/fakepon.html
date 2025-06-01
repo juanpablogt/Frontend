@@ -1,52 +1,63 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fakemon Game</title>
-    <script src="./fakepon.js"></script>
-</head>
-<body>
-    <h1>Welcome to Fakemon !!! 🔥💧🌱</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fakemon Game</title>
+        <script src="./fakepon.js"></script>
+        <link rel="stylesheet" href="./fakepon.css">
+    </head>
+    <body>
+        <section id = "seleccionar-mascota">
+            <h1 class="titulo">Fakemon</h1>
+            <h2 class="subtitulo">Selecciona tu mascota</h2>
+        
+            <div class ="tarjetas">
+                <label class="tarjeta-de-mascota" for="hipop">
+                    <p>hipop</p>
+                    <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="hipop">
+                </label>
+                <input type="radio" name = "mascota" id = "hipop">
 
-    <section id = "seleccionar mascota">
-        <h2>Selecciona tu mascota</h2>
+                <label class="tarjeta-de-mascota" for="tortugon">
+                    <p>tortugon</p>
+                    <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="tortugon">
+                </label>
+                <input type="radio" name = "mascota" id = "tortugon">
 
-        <label for="hipop">hipop</label>
-        <input type="radio" name = "mascota" id = "hipop">
-        <label for="tortugon">tortugon</label>
-        <input type="radio" name = "mascota" id = "tortugon">
-        <label for="pajarito">pajarito</label>
-        <input type="radio" name = "mascota" id = "pajarito">
-        <label for="perrito">perrito</label>
-        <input type="radio" name = "mascota" id = "perrito">
+                <label class="tarjeta-de-mascota" for="pajarito">
+                    <p>pajarito</p>
+                    <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="pajarito">
+                    </label>
+            </div>
+        
+            <button id="boton-mascota">Select 👈</BUtton>
+        </section>
 
-        <button id="boton-mascota">Select 👈</BUtton>
-    </section>
+        <section id="seleccionar-ataque">
+            <h1>Welcome to Fakemon !!! 🔥💧🌱</h1>
+            <h2>Selecciona tu ataque</h2>
+            <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador"> 3 </span> vidas</p>
+            <p>La mascota del enemigo <span id = "mascota-enemy"> </span> tiene <span id = "vidas-enemy"> 3 </span> vidas</p>
 
-    <section id="seleccionar ataque">
-        <h2>Selecciona tu ataque</h2>
-        <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador"> 3 </span> vidas</p>
-        <p>La mascota del enemigo <span id = "mascota-enemy"> </span> tiene <span id = "vidas-enemy"> 3 </span> vidas</p>
+            <p>
+                <button id="boton-fire">Fire 🔥</button>
+                <button id="boton-water">Water 💧</button>
+                <button id="boton-grass">Grass 🌿</button>
+            </p>
+        </section>
 
-    <p>
-        <button id="boton-fire">Fire 🔥</button>
-        <button id="boton-water">Water 💧</button>
-        <button id="boton-grass">Grass 🌿</button>
-    </p>
-    </section>
-
-    <section id = "mensajes">
-       
+        <section id = "mensajes">
+        
 
 
 
-    </section>
-    
-    <section id="reinicio">
-        <p>Aca reinicia la batalla</p>
-        <p>
-            <button id="reinicio">reinicio 🔁</button>
-        </p>
-    </section>
-</body>
+        </section>
+        
+        <section id="reinicio">
+            <p>Aca reinicia la batalla</p>
+            <p>
+                <button id="boton-reinicio">reinicio 🔁</button>
+            </p>
+        </section>
+    </body>
 </html>
