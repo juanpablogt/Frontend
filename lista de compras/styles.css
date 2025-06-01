@@ -53,12 +53,12 @@
     color: #db3838;
     font-size: 12px;
     font-family: 'Alfa Slab One', serif;
-    margin-top: 28px;
 }
 
 .lista-name {
     font-family: 'Alfa Slab One', serif;
     font-size: 20px;
     color: #000000;
-
+    display: grid;
+    grid-template-columns: 226px 74px;
 }

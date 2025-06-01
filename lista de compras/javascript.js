@@ -16,7 +16,7 @@ function iniciar() {
     });
 
     function createItem(x) {
-        let ourHTML = `<li class="lista-name">${x} <button class="delete" onclick="deleteItem(this)">Delete</button></li>`;
+        let ourHTML = `<div class="lista-name">${x} <button class="delete" onclick="deleteItem(this)">Delete</button></div>`;
         ourlist.insertAdjacentHTML("beforeend", ourHTML);
         ourfield.value = "";
         ourfield.focus();
