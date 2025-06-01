@@ -63,3 +63,30 @@ input{
     margin-top: 61px;
     font-family: fredoka one, cursive;
 }
+
+#seleccionar-ataque{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#5409DA;
+}
+
+.boton-atake {
+    width: 200px;
+    height: 50px;
+    background-color: #BBFBFF;
+    border-radius: 20px;
+    border: 2px solid #db3838;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 61px;
+    font-family: fredoka one, cursive;
+}
+
+.titulo2 {
+    text-align: center;
+    color:#d44141FF;
+    font-size: 80px;
+    margin: 44px;
+}

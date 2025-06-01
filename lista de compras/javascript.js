@@ -1,4 +1,5 @@
 window.addEventListener("load", iniciar);
+
 function iniciar() {
     let ourform = document.getElementById("ourform");
     let ourfield = document.getElementById("ourfield");
@@ -6,7 +7,12 @@ function iniciar() {
 
     ourform.addEventListener("submit", (e) => {
         e.preventDefault();
-        createItem(ourfield.value);
+        const inputValue = ourfield.value.trim(); // Elimina espacios al inicio y al final
+        if (inputValue !== "") {
+            createItem(inputValue);
+        } else {
+            alert("No puedes agregar un elemento vacío.");
+        }
     });
 
     function createItem(x) {

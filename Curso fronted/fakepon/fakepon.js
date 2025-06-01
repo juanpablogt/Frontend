@@ -25,7 +25,7 @@ function iniciar() {
 
 function seleccionarMascota() {
     let sectionSeleccionaAtaque = document.getElementById("seleccionar-ataque");
-    sectionSeleccionaAtaque.style.display = "block";
+    sectionSeleccionaAtaque.style.display = "flex";
 
     let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
     sectionSeleccionarMascota.style.display = "none";
@@ -158,7 +158,7 @@ function resetearJuego() {
     let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
     sectionSeleccionarAtaque.style.display = "none";
     let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
-    sectionSeleccionarMascota.style.display = "block";
+    sectionSeleccionarMascota.style.display = "flex";
     let spanMascotaJugador = document.getElementById("mascota-jugador");
     let spanMascotaOponente = document.getElementById("mascota-enemy");
 }

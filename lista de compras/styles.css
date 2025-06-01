@@ -12,7 +12,7 @@
     align-items: center;
     background-color: #7cf49c;
     width: 229px;
-    height: 46px;
+    height: 35px;
     border-radius: 20px;
     font-family: 'Alfa Slab One', serif;
     font-size: 20px;
@@ -28,7 +28,7 @@
 
 .botton {
     width: 238px;
-    height: 43px;
+    height: 32px;
     background-color: #BBFBFF;
     border-radius: 20px;
     border: 2px solid #db3838;
@@ -36,4 +36,10 @@
     font-size: 20px;
     font-family: 'Alfa Slab One', serif;
     margin-top: 28px;
+}
+
+.container2{
+    display: flex;
+    flex-direction: column;
+    background-color: #7f8881;
 }
