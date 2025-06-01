@@ -159,7 +159,6 @@ function resetearJuego() {
     sectionSeleccionarAtaque.style.display = "none";
     let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
     sectionSeleccionarMascota.style.display = "flex";
-    let spanMascotaJugador = document.getElementById("mascota-jugador");
-    let spanMascotaOponente = document.getElementById("mascota-enemy");
+    
 }
 window.addEventListener("load", iniciar);

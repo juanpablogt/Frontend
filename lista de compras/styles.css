@@ -43,3 +43,22 @@
     flex-direction: column;
     background-color: #7f8881;
 }
+
+.delete {
+    width: 73px;
+    height: 32px;
+    background-color: #BBFBFF;
+    border-radius: 20px;
+    border: 2px solid #db3838;
+    color: #db3838;
+    font-size: 12px;
+    font-family: 'Alfa Slab One', serif;
+    margin-top: 28px;
+}
+
+.lista-name {
+    font-family: 'Alfa Slab One', serif;
+    font-size: 20px;
+    color: #000000;
+
+}

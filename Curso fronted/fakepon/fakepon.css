@@ -90,3 +90,35 @@ input{
     font-size: 80px;
     margin: 44px;
 }
+
+.scoreA {
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    margin-right: 20;
+    background: firebrick;
+    width: 287px;
+}
+
+.scoreB {
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    margin-right: 20;
+    background: firebrick;
+    width: 380px;
+}
+
+.scorePlayer {
+    display: flex;
+    margin-right: 11px;
+}
+
+#mensajes {
+    background: linen;
+    margin-top: 64px;
+    width: 478px;
+    height: 37px;
+    border-radius: 7px;
+    text-align: center;
+}
