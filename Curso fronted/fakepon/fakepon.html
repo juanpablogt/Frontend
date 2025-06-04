@@ -3,7 +3,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Fakemon Game</title>
-        <script src="./fakepon.js"></script>
         <link rel="stylesheet" href="./fakepon.css">
     </head>
     <body>
@@ -12,23 +11,22 @@
             <h2 class="subtitulo">Selecciona tu mascota</h2>
         
             <div class ="tarjetas">
+                <input type="radio" name = "mascota" id = "hipop">
                 <label class="tarjeta-de-mascota" for="hipop">
                     <p>hipop</p>
                     <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="hipop">
-                </label>
-                <input type="radio" name = "mascota" id = "hipop">
-
+                </label>            
+                <input type="radio" name = "mascota" id = "tortugon">
                 <label class="tarjeta-de-mascota" for="tortugon">
                     <p>tortugon</p>
                     <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="tortugon">
                 </label>
-                <input type="radio" name = "mascota" id = "tortugon">
-
+                <input type="radio" name = "mascota" id = "pajarito">
                 <label class="tarjeta-de-mascota" for="pajarito">
                     <p>pajarito</p>
                     <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="pajarito">
                     </label>
-                    <input type="radio" name = "mascota" id = "pajarito">
+                    
             </div>
         
             <button id="boton-mascota">Select 👈</BUtton>
@@ -39,8 +37,8 @@
             <h2>Selecciona tu ataque</h2>
 
             <div class="scorePlayer">
-                <p class="scoreA">Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador"> 3 </span> vidas</p>
-                <p class="scoreB">La mascota del enemigo <span id = "mascota-enemy"> </span> tiene <span id = "vidas-enemy"> 3 </span> vidas</p>
+                <p class="scoreA"><span id="mascota-jugador"></span> tiene <span id="vidas-jugador"> 3 </span> vidas</p>
+                <p class="scoreB"><span id = "mascota-enemy"> </span> tiene <span id = "vidas-enemy"> 3 </span> vidas</p>
             </div>
             
             <div>
@@ -59,7 +57,7 @@
                     <p>Aca reinicia la batalla</p>
                 </section>
             </div>
-            
         </section> 
+        <script src="./fakepon.js"></script>
     </body>
 </html>

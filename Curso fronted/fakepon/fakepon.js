@@ -2,39 +2,43 @@ let ataquejugador;
 let ataqueEnemy;
 let vidasJugador = 3;
 let vidasOponente = 3;
+const setionReinicio = document.getElementById("reinicio");
+const setionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+const botonMascota = document.getElementById("boton-mascota");
+const botonFire = document.getElementById("boton-fire");
+const botonWater = document.getElementById("boton-water");
+const botonGrass = document.getElementById("boton-grass");
+const botonReset = document.getElementById("reinicio");
+
+const sectionSeleccionaAtaque = document.getElementById("seleccionar-ataque");
+const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
+const inputhipop = document.getElementById("hipop");
+const inputtortugon = document.getElementById("tortugon");
+const inputpajarito = document.getElementById("pajarito");
+const inputperrito = document.getElementById("perrito");
+const spanMascotaJugador = document.getElementById("mascota-jugador");
+
+const spanMascotaOponente = document.getElementById("mascota-enemy");
+
+const sapanVidasJugador = document.getElementById("vidas-jugador");
+const spanVidasOponente = document.getElementById("vidas-enemy");
+const sectionMensajes = document.getElementById("mensajes");
+
+const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 
 function iniciar() {
-
-    let setionReinicio = document.getElementById("reinicio");
     setionReinicio.style.display = "none";
-    let setionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
     setionSeleccionarAtaque.style.display = "none";
-
-    let botonMascota = document.getElementById("boton-mascota");
     botonMascota.addEventListener("click", seleccionarMascota);
-
-    let botonFire = document.getElementById("boton-fire");
     botonFire.addEventListener("click", botonFireClick);
-    let botonWater = document.getElementById("boton-water");
     botonWater.addEventListener("click", botonWaterClick);
-    let botonGrass = document.getElementById("boton-grass");
     botonGrass.addEventListener("click", botonGrassClick);
-    let botonReset = document.getElementById("reinicio");
     botonReset.addEventListener("click", resetearJuego);
 }
 
 function seleccionarMascota() {
-    let sectionSeleccionaAtaque = document.getElementById("seleccionar-ataque");
     sectionSeleccionaAtaque.style.display = "flex";
-
-    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
     sectionSeleccionarMascota.style.display = "none";
-
-    let inputhipop = document.getElementById("hipop");
-    let inputtortugon = document.getElementById("tortugon");
-    let inputpajarito = document.getElementById("pajarito");
-    let inputperrito = document.getElementById("perrito");
-    let spanMascotaJugador = document.getElementById("mascota-jugador");
 
     if (inputhipop.checked) {
         spanMascotaJugador.innerHTML = "Hipop ";
@@ -53,7 +57,6 @@ function seleccionarMascota() {
 
 function seleccionarOponente() {
     let ataqueAleatorio = aleatorio(1, 4);
-    let spanMascotaOponente = document.getElementById("mascota-enemy");
     if (ataqueAleatorio == 1) {
         spanMascotaOponente.innerHTML = "Hipop";
     }
@@ -85,7 +88,6 @@ function ataquealeaEnemy() {
     let ataqueAleatorio = aleatorio(1, 3);
     if (ataqueAleatorio == 1) {
         ataqueEnemy = "Fuego";
-
     }
     else if (ataqueAleatorio == 2) {
         ataqueEnemy = "Agua";
@@ -96,7 +98,6 @@ function ataquealeaEnemy() {
     else {
         ataqueEnemy = "Error";
     }
-
     combate();
 }
 
@@ -107,11 +108,6 @@ function aleatorio(min, max) {
 }
 
 function combate() {
-    let sapanVidasJugador = document.getElementById("vidas-jugador");
-    let spanVidasOponente = document.getElementById("vidas-enemy");
-    let spanMascotaJugador = document.getElementById("mascota-jugador");
-    let spanMascotaOponente = document.getElementById("mascota-enemy");
-    let sectionMensajes = document.getElementById("mensajes");
     
     if (ataquejugador == ataqueEnemy) {
         sectionMensajes.innerHTML = "Empate";
@@ -133,9 +129,7 @@ function combate() {
 
 }
 function contadorVidas() {
-    let sapanVidasJugador = document.getElementById("vidas-jugador");
-    let spanVidasOponente = document.getElementById("vidas-enemy");
-
+    
     if (vidasJugador <= 0) {
         alert("Perdiste todas tus vidas, el juego ha terminado");
         sapanVidasJugador.innerHTML = 0;
@@ -147,17 +141,12 @@ function contadorVidas() {
     }
 }
 function resetearJuego() {
-    let sectionMensajes = document.getElementById("mensajes");
     sectionMensajes.innerHTML = "";
     vidasJugador = 3;
     vidasOponente = 3;
-    let sapanVidasJugador = document.getElementById("vidas-jugador");
-    let spanVidasOponente = document.getElementById("vidas-enemy");
     sapanVidasJugador.innerHTML = vidasJugador;
     spanVidasOponente.innerHTML = vidasOponente;
-    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
     sectionSeleccionarAtaque.style.display = "none";
-    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
     sectionSeleccionarMascota.style.display = "flex";
     
 }

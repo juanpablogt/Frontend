@@ -36,6 +36,10 @@ input{
     display: none;
 }
 
+input:checked + label {
+    background-color: #d44141FF;
+}
+
 .subtitulo {
     font-size: 20px;
     
@@ -95,18 +99,25 @@ input{
     display: flex;
     gap: 10px;
     justify-content: start;
-    margin-right: 20;
+    margin-right: 5px;
+    margin-top: 18px;
     background: firebrick;
-    width: 287px;
+    width: 348px;
+    height: 80px;
+    font-size: 33px;
 }
 
 .scoreB {
-    display: flex;
+     display: flex;
     gap: 10px;
     justify-content: start;
-    margin-right: 20;
+    margin-right: 5px;
+    margin-top: 18px;
     background: firebrick;
-    width: 380px;
+    width: 364px;
+    height: 80px;
+    margin-left: 97px;
+    font-size: 33px;
 }
 
 .scorePlayer {
