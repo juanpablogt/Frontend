@@ -2,6 +2,7 @@ let ataquejugador;
 let ataqueEnemy;
 let vidasJugador = 3;
 let vidasOponente = 3;
+
 const setionReinicio = document.getElementById("reinicio");
 const setionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 const botonMascota = document.getElementById("boton-mascota");
@@ -9,7 +10,6 @@ const botonFire = document.getElementById("boton-fire");
 const botonWater = document.getElementById("boton-water");
 const botonGrass = document.getElementById("boton-grass");
 const botonReset = document.getElementById("reinicio");
-
 const sectionSeleccionaAtaque = document.getElementById("seleccionar-ataque");
 const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
 const inputhipop = document.getElementById("hipop");
@@ -17,13 +17,10 @@ const inputtortugon = document.getElementById("tortugon");
 const inputpajarito = document.getElementById("pajarito");
 const inputperrito = document.getElementById("perrito");
 const spanMascotaJugador = document.getElementById("mascota-jugador");
-
 const spanMascotaOponente = document.getElementById("mascota-enemy");
-
 const sapanVidasJugador = document.getElementById("vidas-jugador");
 const spanVidasOponente = document.getElementById("vidas-enemy");
 const sectionMensajes = document.getElementById("mensajes");
-
 const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 
 function iniciar() {
@@ -101,8 +98,6 @@ function ataquealeaEnemy() {
     combate();
 }
 
-
-
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -126,8 +121,8 @@ function combate() {
         
     }
     contadorVidas();
-
 }
+
 function contadorVidas() {
     
     if (vidasJugador <= 0) {
@@ -140,6 +135,7 @@ function contadorVidas() {
         resetearJuego();
     }
 }
+
 function resetearJuego() {
     sectionMensajes.innerHTML = "";
     vidasJugador = 3;
@@ -150,4 +146,5 @@ function resetearJuego() {
     sectionSeleccionarMascota.style.display = "flex";
     
 }
+
 window.addEventListener("load", iniciar);
