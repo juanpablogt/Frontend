@@ -143,8 +143,20 @@ function resetearJuego() {
     sapanVidasJugador.innerHTML = vidasJugador;
     spanVidasOponente.innerHTML = vidasOponente;
     sectionSeleccionarAtaque.style.display = "none";
-    sectionSeleccionarMascota.style.display = "flex";
-    
+    sectionSeleccionarMascota.style.display = "flex";    
 }
+
+class Fakepon {
+    constructor(nombre, imagen, vida) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.vida = vida;
+    }
+}
+
+let hipop = new Fakepon("Hipop", "./assets/mokepons_mokepon_hipodoge_attack.png", 3);
+let tortugon = new Fakepon("Tortugon", "./assets/mokepons_mokepon_copipepo_attack.png", 3);
+let pajarito = new Fakepon("Pajarito", "./assets/mokepons_mokepon_ratigueya_attack.png", 3);
+
 
 window.addEventListener("load", iniciar);
