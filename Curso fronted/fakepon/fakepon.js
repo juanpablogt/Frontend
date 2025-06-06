@@ -2,6 +2,7 @@ let ataquejugador;
 let ataqueEnemy;
 let vidasJugador = 3;
 let vidasOponente = 3;
+let mokepones = [];
 
 const setionReinicio = document.getElementById("reinicio");
 const setionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
@@ -151,6 +152,7 @@ class Fakepon {
         this.nombre = nombre;
         this.imagen = imagen;
         this.vida = vida;
+        this.ataques = [];
     }
 }
 
@@ -158,5 +160,26 @@ let hipop = new Fakepon("Hipop", "./assets/mokepons_mokepon_hipodoge_attack.png"
 let tortugon = new Fakepon("Tortugon", "./assets/mokepons_mokepon_copipepo_attack.png", 3);
 let pajarito = new Fakepon("Pajarito", "./assets/mokepons_mokepon_ratigueya_attack.png", 3);
 
+hipop.ataques.push(
+    { nombre: "🔥", id: "boton-fire" },
+    { nombre: "🔥", id: "boton-fire" },
+    { nombre: "🔥", id: "boton-fire" },
+    { nombre: "💧", id: "boton-water" },
+    { nombre: "🌱", id: "boton-grass" });
 
+tortugon.ataques.push(
+    { nombre: "🔥", id: "boton-fire" },
+    { nombre: "💧", id: "boton-water" },
+    { nombre: "💧", id: "boton-water" },
+    { nombre: "💧", id: "boton-water" },
+    { nombre: "🌱", id: "boton-grass" });
+
+pajarito.ataques.push(
+    { nombre: "🔥", id: "boton-fire" },
+    { nombre: "💧", id: "boton-water" },
+    { nombre: "🌱", id: "boton-grass" },
+    { nombre: "🌱", id: "boton-grass" },
+    { nombre: "🌱", id: "boton-grass" });
+
+mokepones.push(hipop, tortugon, pajarito);
 window.addEventListener("load", iniciar);
