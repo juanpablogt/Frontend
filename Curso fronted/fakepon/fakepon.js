@@ -56,13 +56,11 @@ function seleccionarMascota() {
     sectionSeleccionarMascota.style.display = "none";
 
     if (inputhipop.checked) {
-        spanMascotaJugador.innerHTML = "Hipop";
+        spanMascotaJugador.innerHTML = inputhipop.id;
     } else if (inputtortugon.checked) {
-        spanMascotaJugador.innerHTML = "Tortugon";
+        spanMascotaJugador.innerHTML = inputtortugon.id;
     } else if (inputpajarito.checked) {
-        spanMascotaJugador.innerHTML = "Pajarito";
-    } else if (inputperrito.checked) {
-        spanMascotaJugador.innerHTML = "Perrito";
+        spanMascotaJugador.innerHTML = inputpajarito.id;
     } else {
         alert("Por favor, selecciona una mascota");
         sectionSeleccionarAtaque.style.display = "none";
