@@ -20,7 +20,7 @@ body {
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
-    border: 2px solid 4E71FF;
+    border: 2px solid #4E71FF;
     display: flex;
     border-radius: 20px;
     justify-content: center;
@@ -132,4 +132,23 @@ input:checked + label {
     height: 37px;
     border-radius: 7px;
     text-align: center;
+}
+
+.tarjeta-de-mascota,
+.tarjeta-mokepon {
+    width: 144px;
+    height: 100px;
+    background: #BBFBFF;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 2px solid #4E71FF;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-mokepon img {
+    width: 70px;
 }
