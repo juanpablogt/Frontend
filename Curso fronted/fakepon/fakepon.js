@@ -8,6 +8,10 @@ let inputhipop
 let inputtortugon 
 let inputpajarito
 let mascotj
+let ataquesFakepon;
+let botonFire
+let botonWater 
+let botonGrass
 
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
@@ -16,11 +20,10 @@ const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
 
 const botonMascota = document.getElementById("boton-mascota");
-const botonFire = document.getElementById("boton-fire");
-const botonWater = document.getElementById("boton-water");
-const botonGrass = document.getElementById("boton-grass");
+
 const botonReset = document.getElementById("reinicio");
 
+const contenedorAtaques = document.getElementById("contenedor-ataques");
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 const spanMascotaOponente = document.getElementById("mascota-enemy");
 const spanVidasJugador = document.getElementById("vidas-jugador");
@@ -46,9 +49,6 @@ function iniciar() {
     });
     
     botonMascota.addEventListener("click", seleccionarMascota);
-    botonFire.addEventListener("click", botonFireClick);
-    botonWater.addEventListener("click", botonWaterClick);
-    botonGrass.addEventListener("click", botonGrassClick);
     botonReset.addEventListener("click", resetearJuego);
 }
 
@@ -75,14 +75,29 @@ function seleccionarMascota() {
     seleccionarOponente();
 }
 
-function extraerAtaques(mascota) {
+function extraerAtaques(mascotj) {
     let ataques;
     for (let i = 0; i < fakepones.length; i++) {
         if (mascotj === fakepones[i].nombre) {
             ataques = fakepones[i].ataques;
         }
     }
-    console.log(ataques);
+    mostrarAtaques(ataques);
+}
+
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => {
+        ataquesFakepon = `
+            <button id=${ataque.id} class="boton-ataque">${ataque.nombre}</button>  
+        `;
+        contenedorAtaques.innerHTML += ataquesFakepon;
+    });
+     botonFire = document.getElementById("boton-fire");
+     botonWater = document.getElementById("boton-water");
+     botonGrass = document.getElementById("boton-grass");
+     botonFire.addEventListener("click", botonFireClick);
+     botonWater.addEventListener("click", botonWaterClick);
+     botonGrass.addEventListener("click", botonGrassClick);
 }
 
 function seleccionarOponente() {
