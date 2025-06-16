@@ -4,6 +4,10 @@ let vidasJugador = 3;
 let vidasOponente = 3;
 let fakepones = [];
 let opcionFakepones;
+let inputhipop 
+let inputtortugon 
+let inputpajarito 
+
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 const sectionReinicio = document.getElementById("reinicio");
@@ -15,11 +19,6 @@ const botonFire = document.getElementById("boton-fire");
 const botonWater = document.getElementById("boton-water");
 const botonGrass = document.getElementById("boton-grass");
 const botonReset = document.getElementById("reinicio");
-
-const inputhipop = document.getElementById("hipop");
-const inputtortugon = document.getElementById("tortugon");
-const inputpajarito = document.getElementById("pajarito");
-const inputperrito = document.getElementById("perrito");
 
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 const spanMascotaOponente = document.getElementById("mascota-enemy");
@@ -40,6 +39,9 @@ function iniciar() {
             </label>
         `;
         contenedorTarjetas.innerHTML += opcionFakepones;
+        inputhipop = document.getElementById("Hipop");
+        inputtortugon = document.getElementById("Tortugon");
+        inputpajarito = document.getElementById("Pajarito");
     });
     
     botonMascota.addEventListener("click", seleccionarMascota);
