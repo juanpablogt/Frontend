@@ -6,7 +6,8 @@ let fakepones = [];
 let opcionFakepones;
 let inputhipop 
 let inputtortugon 
-let inputpajarito 
+let inputpajarito
+let mascotj
 
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
@@ -57,24 +58,36 @@ function seleccionarMascota() {
 
     if (inputhipop.checked) {
         spanMascotaJugador.innerHTML = inputhipop.id;
+        mascotj = inputhipop.id;
     } else if (inputtortugon.checked) {
         spanMascotaJugador.innerHTML = inputtortugon.id;
+        mascotj = inputtortugon.id;
     } else if (inputpajarito.checked) {
         spanMascotaJugador.innerHTML = inputpajarito.id;
+        mascotj = inputpajarito.id;
     } else {
         alert("Por favor, selecciona una mascota");
         sectionSeleccionarAtaque.style.display = "none";
         sectionSeleccionarMascota.style.display = "flex";
         return;
     }
-
+    extraerAtaques(mascotj);
     seleccionarOponente();
 }
 
+function extraerAtaques(mascota) {
+    let ataques;
+    for (let i = 0; i < fakepones.length; i++) {
+        if (mascotj === fakepones[i].nombre) {
+            ataques = fakepones[i].ataques;
+        }
+    }
+    console.log(ataques);
+}
+
 function seleccionarOponente() {
-    const opciones = ["Hipop", "Tortugon", "Pajarito", "Perrito"];
-    const aleatorioIndex = aleatorio(0, opciones.length - 1);
-    spanMascotaOponente.innerHTML = opciones[aleatorioIndex];
+    let aleatorioIndex = aleatorio(0, fakepones.length - 1);
+    spanMascotaOponente.innerHTML = fakepones[aleatorioIndex].nombre;
 }
 
 function botonFireClick() {
