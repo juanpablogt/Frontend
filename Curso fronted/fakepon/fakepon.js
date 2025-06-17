@@ -10,16 +10,17 @@ let ataqueJugador = [];
         const sectionReinicio = document.getElementById("reinicio");
         const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
         const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
-
         const botonMascota = document.getElementById("boton-mascota");
         const botonReset = document.getElementById("reinicio");
-
         const contenedorAtaques = document.getElementById("contenedor-ataques");
         const spanMascotaJugador = document.getElementById("mascota-jugador");
         const spanMascotaOponente = document.getElementById("mascota-enemy");
         const spanVidasJugador = document.getElementById("vidas-jugador");
         const spanVidasOponente = document.getElementById("vidas-enemy");
         const sectionMensajes = document.getElementById("mensajes");
+        const sectionVerMapa = document.getElementById("ver-mapa");
+        const mapa = document.getElementById("mapa");
+        const lienzo = mapa.getContext("2d");
 
         class Fakepon {
             constructor(nombre, imagen, vida) {
@@ -27,6 +28,12 @@ let ataqueJugador = [];
                 this.imagen = imagen;
                 this.vida = vida;
                 this.ataques = [];
+                this.x = 20;
+                this.y = 20;
+                this.ancho = 60;
+                this.alto = 60;
+                this.mapaFoto = new Image();
+                this.mapaFoto.src = imagen;
             }
         }
 
@@ -62,6 +69,7 @@ let ataqueJugador = [];
 
         function iniciar() {
             sectionSeleccionarAtaque.style.display = "none";
+            sectionVerMapa.style.display = "none";
 
             fakepones.forEach((fakepon) => {
                 contenedorTarjetas.innerHTML += `
@@ -75,26 +83,39 @@ let ataqueJugador = [];
 
             botonMascota.addEventListener("click", seleccionarMascota);
             botonReset.addEventListener("click", resetearJuego);
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowRight") {
+                    moverPersonaje();
+                }
+            });
         }
 
         function seleccionarMascota() {
-            sectionSeleccionarAtaque.style.display = "flex";
             sectionSeleccionarMascota.style.display = "none";
+            sectionVerMapa.style.display = "flex";
 
-            const seleccion = document.querySelector("input[name='mascota']:checked");
+            const inputsMascota = document.querySelectorAll('input[name="mascota"]');
+            let seleccion = null;
+
+            inputsMascota.forEach((input) => {
+                if (input.checked) {
+                    seleccion = input;
+                }
+            });
 
             if (!seleccion) {
                 alert("Por favor selecciona una mascota.");
-                sectionSeleccionarAtaque.style.display = "none";
                 sectionSeleccionarMascota.style.display = "flex";
                 return;
             }
 
-            mascotj = seleccion.id;
-            spanMascotaJugador.innerHTML = mascotj;
+            mascotj = fakepones.find(f => f.nombre === seleccion.id);
+            spanMascotaJugador.innerHTML = mascotj.nombre;
 
-            extraerAtaques(mascotj);
+            extraerAtaques(mascotj.nombre);
             seleccionarOponente();
+            pintarpersonaje();
         }
 
         function extraerAtaques(mascota) {
@@ -154,11 +175,11 @@ let ataqueJugador = [];
                 (ultimoAtaqueJugador === "AGUA" && ultimoAtaqueEnemy === "FUEGO") ||
                 (ultimoAtaqueJugador === "PLANTA" && ultimoAtaqueEnemy === "AGUA")
             ) {
-                sectionMensajes.innerHTML = `¡Ganaste! ${spanMascotaJugador.innerHTML} ataca con ${ultimoAtaqueJugador}, y ${spanMascotaOponente.innerHTML} ataca con ${ultimoAtaqueEnemy}`;
+                sectionMensajes.innerHTML = `¡Ganaste!`;
                 vidasOponente--;
                 spanVidasOponente.innerHTML = vidasOponente;
             } else {
-                sectionMensajes.innerHTML = `¡Perdiste! ${spanMascotaJugador.innerHTML} ataca con ${ultimoAtaqueJugador}, y ${spanMascotaOponente.innerHTML} ataca con ${ultimoAtaqueEnemy}`;
+                sectionMensajes.innerHTML = `¡Perdiste!`;
                 vidasJugador--;
                 spanVidasJugador.innerHTML = vidasJugador;
             }
@@ -177,11 +198,25 @@ let ataqueJugador = [];
         }
 
         function resetearJuego() {
-            location.reload(); // reinicia completamente
+            location.reload();
         }
 
         function aleatorio(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
+
+        function pintarpersonaje() {
+            lienzo.clearRect(0, 0, mapa.width, mapa.height);
+            lienzo.drawImage(mascotj.mapaFoto, mascotj.x, mascotj.y, mascotj.ancho, mascotj.alto);
+        }
+
+        // const moverPersonaje = document.getElementById("mover-personaje");
+
+        function moverPersonaje() {
+            mascotj.x = mascotj.x + 5;
+            pintarpersonaje();
+        }
+
+        // moverPersonaje.addEventListener("click", moverPersonaje);
 
         window.addEventListener("load", iniciar);
