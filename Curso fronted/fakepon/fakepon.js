@@ -210,13 +210,9 @@ let ataqueJugador = [];
             lienzo.drawImage(mascotj.mapaFoto, mascotj.x, mascotj.y, mascotj.ancho, mascotj.alto);
         }
 
-        // const moverPersonaje = document.getElementById("mover-personaje");
-
         function moverPersonaje() {
             mascotj.x = mascotj.x + 5;
             pintarpersonaje();
         }
-
-        // moverPersonaje.addEventListener("click", moverPersonaje);
 
         window.addEventListener("load", iniciar);
