@@ -152,3 +152,7 @@ input:checked + label {
 .tarjeta-mokepon img {
     width: 70px;
 }
+
+#reinicio {
+    margin-top: 4px;
+}
