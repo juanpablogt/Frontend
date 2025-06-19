@@ -5,6 +5,7 @@ let vidasOponente = 3;
 let fakepones = [];
 let mascotj;
 let ataqueFoqueEnemy = [];
+let intervalo
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 const sectionReinicio = document.getElementById("reinicio");
@@ -34,6 +35,8 @@ class Fakepon {
         this.alto = 60;
         this.mapaFoto = new Image();
         this.mapaFoto.src = imagen;
+        this.velocidadX = 0;
+        this.velocidadY = 0;
     }
 }
 
@@ -84,16 +87,12 @@ function iniciar() {
     botonMascota.addEventListener("click", seleccionarMascota);
     botonReset.addEventListener("click", resetearJuego);
 
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") {
-            moverPersonaje();
-        }
-    });
 }
 
 function seleccionarMascota() {
     sectionSeleccionarMascota.style.display = "none";
     sectionVerMapa.style.display = "flex";
+    iniciarMapa();
 
     const inputsMascota = document.querySelectorAll('input[name="mascota"]');
     let seleccion = null;
@@ -206,13 +205,48 @@ function aleatorio(min, max) {
 }
 
 function pintarpersonaje() {
+    mascotj.x = mascotj.x + mascotj.velocidadX;
+    mascotj.y = mascotj.y + mascotj.velocidadY;
     lienzo.clearRect(0, 0, mapa.width, mapa.height);
     lienzo.drawImage(mascotj.mapaFoto, mascotj.x, mascotj.y, mascotj.ancho, mascotj.alto);
 }
 
-function moverPersonaje() {
-    mascotj.x = mascotj.x + 5;
-    pintarpersonaje();
+function moverDerecha() {
+    mascotj.velocidadX = 5;
+}
+
+function moverIzquierda() {
+    mascotj.velocidadX = -5;
+}
+
+function moverAbajo() {
+    mascotj.velocidadY = 5;
+}
+
+function moverArriba() {
+    mascotj.velocidadY = -5;
+}
+
+function detenerMovimiento() {
+    mascotj.velocidadX = 0;
+    mascotj.velocidadY = 0;
+}
+
+function sePresionoTecla(event) {
+    switch (event.key) {
+        case "ArrowUp": moverArriba(); break;
+        case "ArrowDown": moverAbajo(); break;
+        case "ArrowLeft": moverIzquierda(); break;
+        case "ArrowRight": moverDerecha(); break;
+        default: break;
+    }
+}
+
+function iniciarMapa() {
+    intervalo = setInterval(pintarpersonaje, 50);
+    window.addEventListener("keydown", sePresionoTecla);
+    window.addEventListener("keyup", detenerMovimiento);
+
 }
 
 window.addEventListener("load", iniciar);
