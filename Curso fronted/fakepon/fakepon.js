@@ -6,6 +6,8 @@ let fakepones = [];
 let mascotj;
 let ataqueFoqueEnemy = [];
 let intervalo
+let mapaBackground = new Image();
+mapaBackground.src = "./assets/mokemap.png";
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 const sectionReinicio = document.getElementById("reinicio");
@@ -24,25 +26,37 @@ const mapa = document.getElementById("mapa");
 const lienzo = mapa.getContext("2d");
 
 class Fakepon {
-    constructor(nombre, imagen, vida) {
+    constructor(nombre, imagen, vida,fotoMapa, x = 10, y = 10) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.vida = vida;
         this.ataques = [];
-        this.x = 20;
-        this.y = 20;
+        this.x = x;
+        this.y = y;
         this.ancho = 60;
         this.alto = 60;
         this.mapaFoto = new Image();
-        this.mapaFoto.src = imagen;
+        this.mapaFoto.src = fotoMapa;
         this.velocidadX = 0;
         this.velocidadY = 0;
     }
+    pintarmokepon() {
+            lienzo.drawImage(
+                this.mapaFoto, 
+                this.x, 
+                this.y, 
+                this.ancho, 
+                this.alto
+            );
+    }
 }
+let hipop = new Fakepon("Hipop", "./assets/mokepons_mokepon_hipodoge_attack.png", 3, './assets/hipodoge.png');
+let tortugon = new Fakepon("Tortugon", "./assets/mokepons_mokepon_capipepo_attack.png", 3, './assets/capipepo.png');
+let pajarito = new Fakepon("Pajarito", "./assets/mokepons_mokepon_ratigueya_attack.png", 3, './assets/ratigueya.png');
 
-let hipop = new Fakepon("Hipop", "./assets/mokepons_mokepon_hipodoge_attack.png", 3);
-let tortugon = new Fakepon("Tortugon", "./assets/mokepons_mokepon_capipepo_attack.png", 3);
-let pajarito = new Fakepon("Pajarito", "./assets/mokepons_mokepon_ratigueya_attack.png", 3);
+let hipopEnemy = new Fakepon("Hipop", "./assets/mokepons_mokepon_hipodoge_attack.png", 3, './assets/hipodoge.png', 170, 450);
+let tortugonEnemy = new Fakepon("Tortugon", "./assets/mokepons_mokepon_capipepo_attack.png", 3, './assets/capipepo.png', 545, 240);
+let pajaritoEnemy = new Fakepon("Pajarito", "./assets/mokepons_mokepon_ratigueya_attack.png", 3, './assets/ratigueya.png', 270, 130);
 
 hipop.ataques.push(
     { nombre: "🔥", id: "boton-fire" },
@@ -114,7 +128,7 @@ function seleccionarMascota() {
 
     extraerAtaques(mascotj.nombre);
     seleccionarOponente();
-    pintarpersonaje();
+    pintarCanvas();
 }
 
 function extraerAtaques(mascota) {
@@ -204,11 +218,15 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function pintarpersonaje() {
+function pintarCanvas() {
     mascotj.x = mascotj.x + mascotj.velocidadX;
     mascotj.y = mascotj.y + mascotj.velocidadY;
     lienzo.clearRect(0, 0, mapa.width, mapa.height);
-    lienzo.drawImage(mascotj.mapaFoto, mascotj.x, mascotj.y, mascotj.ancho, mascotj.alto);
+    lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height);
+    mascotj.pintarmokepon();
+    hipopEnemy.pintarmokepon();
+    tortugonEnemy.pintarmokepon();
+    pajaritoEnemy.pintarmokepon();   
 }
 
 function moverDerecha() {
@@ -243,7 +261,9 @@ function sePresionoTecla(event) {
 }
 
 function iniciarMapa() {
-    intervalo = setInterval(pintarpersonaje, 50);
+    mapa.width = 800;
+    mapa.height = 600;
+    intervalo = setInterval(pintarCanvas, 50);
     window.addEventListener("keydown", sePresionoTecla);
     window.addEventListener("keyup", detenerMovimiento);
 
