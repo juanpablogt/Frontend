@@ -127,7 +127,6 @@ function seleccionarMascota() {
     spanMascotaJugador.innerHTML = mascotj.nombre;
 
     extraerAtaques(mascotj.nombre);
-    seleccionarOponente();
     pintarCanvas();
 }
 
@@ -166,6 +165,7 @@ function seleccionarOponente() {
 }
 
 function ataquealeaEnemy() {
+    console.log("Ataque aleatorio del enemigo", ataqueFoqueEnemy);
     const index = aleatorio(0, ataqueFoqueEnemy.length - 1);
     let tipo;
     const simbolo = ataqueFoqueEnemy[index].nombre;
@@ -294,7 +294,9 @@ function revisarColision(enemy){
         return
     }
     detenerMovimiento();
-    alert(`Colisión con ${enemy.nombre}`);
+    sectionSeleccionarAtaque.style.display = "flex";
+    sectionVerMapa.style.display = "none";
+    seleccionarOponente(enemy);
 }
 
 window.addEventListener("load", iniciar);

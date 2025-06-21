@@ -170,3 +170,15 @@ input:checked + label {
     border: 2px solid #fc1616;
     position: relative;
 }
+
+#ver-mapa button {
+    width: 80px;
+    height: 50px;
+    background-color: #BBFBFF;
+    border-radius: 20px;
+    border: 2px solid #db3838;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-family: fredoka one, cursive;
+}
