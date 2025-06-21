@@ -226,7 +226,13 @@ function pintarCanvas() {
     mascotj.pintarmokepon();
     hipopEnemy.pintarmokepon();
     tortugonEnemy.pintarmokepon();
-    pajaritoEnemy.pintarmokepon();   
+    pajaritoEnemy.pintarmokepon();  
+   
+    if (mascotj.velocidadX !== 0 || mascotj.velocidadY !== 0) {
+        revisarColision(hipopEnemy);
+        revisarColision(tortugonEnemy);
+        revisarColision(pajaritoEnemy);
+    }
 }
 
 function moverDerecha() {
@@ -266,7 +272,29 @@ function iniciarMapa() {
     intervalo = setInterval(pintarCanvas, 50);
     window.addEventListener("keydown", sePresionoTecla);
     window.addEventListener("keyup", detenerMovimiento);
+}
 
+function revisarColision(enemy){
+    const arribaEnemy = enemy.y;
+    const abajoEnemy = enemy.y + enemy.alto;
+    const izquierdaEnemy = enemy.x;
+    const derechaEnemy = enemy.x + enemy.ancho;
+
+    const abajomascota = mascotj.y;
+    const arribomascota = mascotj.y + mascotj.alto;
+    const izquierdaMascota = mascotj.x;
+    const derechaMascota = mascotj.x + mascotj.ancho;
+
+    if (
+        abajomascota < arribaEnemy ||
+        arribomascota > abajoEnemy ||
+        derechaMascota < izquierdaEnemy ||
+        izquierdaMascota > derechaEnemy
+    ){
+        return
+    }
+    detenerMovimiento();
+    alert(`Colisión con ${enemy.nombre}`);
 }
 
 window.addEventListener("load", iniciar);
