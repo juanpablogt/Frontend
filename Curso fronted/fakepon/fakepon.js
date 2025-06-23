@@ -10,6 +10,7 @@ let nombreMascotaEnemigo = "";
 let intervalo;
 let fondoMapa = new Image();
 fondoMapa.src = "./assets/mokemap.png";
+let jugadorId = null;
 
 // Elementos del DOM
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
@@ -88,6 +89,7 @@ function unirseAlJuego() {
                 res.text()
                     .then(function (respuesta) {
                     console.log(respuesta);
+                    jugadorId = respuesta;
                 });
             }
         })
@@ -107,8 +109,23 @@ function seleccionarMascota() {
     mascotaJugador = mascotasDisponibles.find(m => m.nombre === seleccion.id);
     spanMascotaJugador.innerText = mascotaJugador.nombre;
 
+    seleccionarMoqepon(mascotaJugador);
+
     mostrarAtaques(mascotaJugador.ataques);
     iniciarMapa();
+}
+
+function seleccionarMoqepon(mascotaJugador) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            Fakepon: mascotaJugador.nombre,
+            id: jugadorId
+        })
+    });
 }
 
 function mostrarAtaques(ataques) {
