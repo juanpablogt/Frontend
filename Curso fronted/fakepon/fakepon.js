@@ -109,13 +109,13 @@ function seleccionarMascota() {
     mascotaJugador = mascotasDisponibles.find(m => m.nombre === seleccion.id);
     spanMascotaJugador.innerText = mascotaJugador.nombre;
 
-    seleccionarMoqepon(mascotaJugador);
+    seleccionarFakepon(mascotaJugador);
 
     mostrarAtaques(mascotaJugador.ataques);
     iniciarMapa();
 }
 
-function seleccionarMoqepon(mascotaJugador) {
+function seleccionarFakepon(mascotaJugador) {
     fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
         method: "post",
         headers: {
@@ -123,7 +123,10 @@ function seleccionarMoqepon(mascotaJugador) {
         },
         body: JSON.stringify({
             Fakepon: mascotaJugador.nombre,
-            id: jugadorId
+            id: jugadorId,
+            imagen: mascotaJugador.imagen,
+            vida: mascotaJugador.vida
+            // ataques: mascotaJugador.ataques
         })
     });
 }

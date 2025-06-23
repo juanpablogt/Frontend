@@ -22,7 +22,6 @@ class Fakepon {
         this.nombre = nombre;
         this.imagen = imagen;
         this.vida = vida;
-        this.ataques = ataques;
     }
 }
 
@@ -39,7 +38,10 @@ app.get('/unirse', (req, res) => {
 app.post('/mokepon/:jugadorId', (req, res) => {
     const jugadorId = req.params.jugadorId || '';
     const nombre = req.body.Fakepon || '';
-    const fakepon = new Fakepon(nombre);
+    const imagen = req.body.imagen || '';
+    // const ataques = req.body.ataques || [];
+    const vida = req.body.vida || 100;
+    const fakepon = new Fakepon(nombre, imagen, vida);
     const jugadorIndex = jugadores.findIndex((jugador) => jugador.id === jugadorId);
     if (jugadorIndex >= 0) {
         jugadores[jugadorIndex].asiganarFakepon(fakepon);
