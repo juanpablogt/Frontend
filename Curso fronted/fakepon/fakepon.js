@@ -10,6 +10,7 @@ let intervalo;
 let fondoMapa = new Image();
 fondoMapa.src = "./assets/mokemap.png";
 let jugadorId = null;
+let enemigoId = null;
 let ultimaX = 0;
 let ultimaY = 0;
 let tiempoUltimoEnvio = Date.now();
@@ -47,7 +48,7 @@ class Fakepon {
         this.mapaFoto.src = fotoMapa;
         this.velocidadX = 0;
         this.velocidadY = 0;
-        this.id = null; // para identificar al enemigo
+        this.id = null;
     }
 
     pintar() {
@@ -137,59 +138,76 @@ function mostrarAtaques(ataques) {
             ataquesJugador.push(simboloATipo[simbolo]);
             e.target.disabled = true;
             e.target.style.background = "#112f58";
-            ataqueEnemigoAleatorio();
+            if (ataquesJugador.length === 5) {
+                enviarAtaques();
+            }
         });
         contenedorAtaques.appendChild(boton);
     });
 }
 
-function ataqueEnemigoAleatorio() {
-    const simboloATipo = { "🔥": "FUEGO", "💧": "AGUA", "🌱": "PLANTA" };
-    const ataqueSimbolo = ataquesMascotaEnemigo[Math.floor(Math.random() * ataquesMascotaEnemigo.length)];
-    const tipo = simboloATipo[ataqueSimbolo];
-    ataquesEnemigo.push(tipo);
-    combate(tipo);
+function enviarAtaques() {
+    fetch(`http://localhost:8080/fakepon/${jugadorId}/ataques`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ataques: ataquesJugador })
+    });
+
+    intervalo = setInterval(ObtenerAtaques, 50);
 }
 
-function seleccionarOponente(enemigo) {
-    ataquesMascotaEnemigo = enemigo.ataques;
-    nombreMascotaEnemigo = enemigo.nombre;
-    spanMascotaEnemigo.innerText = enemigo.nombre;
-}
-
-function combate(ataqueEnemigoActual) {
-    const ataqueJugadorActual = ataquesJugador[ataquesJugador.length - 1];
-    let resultado = "";
-
-    if (ataqueJugadorActual === ataqueEnemigoActual) {
-        resultado = `Empate: ${ataqueJugadorActual} vs ${ataqueEnemigoActual}`;
-    } else if (
-        (ataqueJugadorActual === "FUEGO" && ataqueEnemigoActual === "PLANTA") ||
-        (ataqueJugadorActual === "AGUA" && ataqueEnemigoActual === "FUEGO") ||
-        (ataqueJugadorActual === "PLANTA" && ataqueEnemigoActual === "AGUA")
-    ) {
-        resultado = `¡Ganaste!: ${ataqueJugadorActual} vence a ${ataqueEnemigoActual}`;
-        vidasEnemigo--;
-        spanVidasEnemigo.innerText = vidasEnemigo;
-    } else {
-        resultado = `¡Perdiste!: ${ataqueEnemigoActual} vence a ${ataqueJugadorActual}`;
-        vidasJugador--;
-        spanVidasJugador.innerText = vidasJugador;
-    }
-
-    sectionMensajes.innerText = resultado;
-
-    if (ataquesJugador.length === 5) {
-        setTimeout(() => {
-            if (vidasJugador > vidasEnemigo) {
-                alert("Ganaste la partida!");
-            } else if (vidasEnemigo > vidasJugador) {
-                alert("Perdiste la partida.");
-            } else {
-                alert("¡La partida terminó en empate!");
+function ObtenerAtaques() {
+    fetch(`http://localhost:8080/fakepon/${jugadorId}/ataques`)
+        .then(res => res.json())
+        .then(({ ataques }) => {
+            if (ataques.length === 5) {
+                ataquesEnemigo = ataques;
+                clearInterval(intervalo);
+                combate();
             }
-        }, 100);
+        })
+        .catch(err => console.error("Error obteniendo ataques:", err));
+}
+
+function combate() {
+    for (let i = 0; i < ataquesJugador.length; i++) {
+        const ataqueJugadorActual = ataquesJugador[i];
+        const ataqueEnemigoActual = ataquesEnemigo[i];
+
+        let resultado = "";
+
+        if (ataqueJugadorActual === ataqueEnemigoActual) {
+            resultado = `Empate: ${ataqueJugadorActual} vs ${ataqueEnemigoActual}`;
+        } else if (
+            (ataqueJugadorActual === "FUEGO" && ataqueEnemigoActual === "PLANTA") ||
+            (ataqueJugadorActual === "AGUA" && ataqueEnemigoActual === "FUEGO") ||
+            (ataqueJugadorActual === "PLANTA" && ataqueEnemigoActual === "AGUA")
+        ) {
+            resultado = `¡Ganaste!: ${ataqueJugadorActual} vence a ${ataqueEnemigoActual}`;
+            vidasEnemigo--;
+            spanVidasEnemigo.innerText = vidasEnemigo;
+        } else {
+            resultado = `¡Perdiste!: ${ataqueEnemigoActual} vence a ${ataqueJugadorActual}`;
+            vidasJugador--;
+            spanVidasJugador.innerText = vidasJugador;
+        }
+
+        const parrafo = document.createElement("p");
+        parrafo.innerText = resultado;
+        sectionMensajes.appendChild(parrafo);
     }
+
+    setTimeout(() => {
+        if (vidasJugador > vidasEnemigo) {
+            alert("¡Ganaste la partida!");
+        } else if (vidasEnemigo > vidasJugador) {
+            alert("Perdiste la partida.");
+        } else {
+            alert("¡La partida terminó en empate!");
+        }
+    }, 100);
 }
 
 function pintarCanvas() {
@@ -233,7 +251,7 @@ function enviarPosicion(x, y) {
                     e.y,
                     base.ataques
                 );
-                fakepon.id = e.id; // ✅ Guarda ID
+                fakepon.id = e.id;
                 return fakepon;
             }
         }).filter(Boolean);
@@ -292,7 +310,6 @@ function revisarColision(enemigo) {
         });
 
         sectionMensajes.innerText = "¡Esperando que el enemigo también empiece!";
-        // NO detener intervalo ni ocultar mapa aquí
     }
 }
 
@@ -304,10 +321,13 @@ function verificarBatalla() {
                 yaEnBatalla = true;
                 detenerMovimiento();
                 clearInterval(intervalo);
+                enemigoId = enemigo.id;
                 sectionVerMapa.style.display = "none";
                 sectionSeleccionarAtaque.style.display = "flex";
                 if (enemigo) {
-                    seleccionarOponente(enemigo);
+                    ataquesMascotaEnemigo = enemigo.ataques;
+                    nombreMascotaEnemigo = enemigo.nombre;
+                    spanMascotaEnemigo.innerText = enemigo.nombre;
                 }
             }
         })
@@ -315,5 +335,5 @@ function verificarBatalla() {
 }
 
 setInterval(verificarBatalla, 500);
-
 window.addEventListener("load", iniciar);
+

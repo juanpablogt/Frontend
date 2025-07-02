@@ -16,6 +16,7 @@ class Jugador {
         this.y = 0;
         this.enemigoId = null;
         this.enBatalla = false;
+        this.ataquesJugador = [];
     }
 
     asignarFakepon(fakepon) {
@@ -33,6 +34,10 @@ class Jugador {
 
     empezarBatalla() {
         this.enBatalla = true;
+    }
+
+    asignarAtaquesJugador(ataques) {
+        this.ataquesJugador = ataques;
     }
 }
 
@@ -106,6 +111,37 @@ app.get("/fakepon/:jugadorId/estado", (req, res) => {
     } else {
         res.send({ enBatalla: false });
     }
+});
+
+app.post("/fakepon/:jugadorId/ataques", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const { ataques } = req.body;
+
+    const jugador = jugadores.find(j => j.id === jugadorId);
+    if (jugador) {
+        jugador.asignarAtaquesJugador(ataques);
+    }
+
+    res.end();
+});
+
+// ✅ NUEVO: Endpoint para obtener ataques del enemigo
+app.get("/fakepon/:jugadorId/ataques", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const jugador = jugadores.find(j => j.id === jugadorId);
+
+    if (!jugador) {
+        res.status(404).send({ mensaje: "Jugador no encontrado" });
+        return;
+    }
+
+    const enemigo = jugadores.find(j => j.id === jugador.enemigoId);
+    if (!enemigo) {
+        res.send({ ataques: [] });
+        return;
+    }
+
+    res.send({ ataques: enemigo.ataquesJugador || [] });
 });
 
 app.listen(PORT, () => {
