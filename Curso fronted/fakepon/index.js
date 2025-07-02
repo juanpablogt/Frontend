@@ -1,57 +1,113 @@
-const express = require('express');
-const cors = require('cors');
-
+const express = require("express");
+const cors = require("cors");
 const app = express();
+const PORT = 8080;
+
 app.use(cors());
 app.use(express.json());
 
-const jugadores = []
+const jugadores = [];
 
 class Jugador {
     constructor(id) {
         this.id = id;
+        this.fakepon = null;
+        this.x = 0;
+        this.y = 0;
+        this.enemigoId = null;
+        this.enBatalla = false;
     }
-    asiganarFakepon(fakepon) {
+
+    asignarFakepon(fakepon) {
         this.fakepon = fakepon;
     }
-}
 
+    actualizarPosicion(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 
-class Fakepon {
-    constructor(nombre, imagen, vida, ataques) {
-        this.nombre = nombre;
-        this.imagen = imagen;
-        this.vida = vida;
+    asignarEnemigo(enemigoId) {
+        this.enemigoId = enemigoId;
+    }
+
+    empezarBatalla() {
+        this.enBatalla = true;
     }
 }
 
-app.get('/unirse', (req, res) => {
+app.get("/unirse", (req, res) => {
     const id = `${Math.random()}`;
-    const nuevoJugador = new Jugador(id);
-    jugadores.push(nuevoJugador);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-
+    const jugador = new Jugador(id);
+    jugadores.push(jugador);
     res.send(id);
 });
 
-app.post('/mokepon/:jugadorId', (req, res) => {
-    const jugadorId = req.params.jugadorId || '';
-    const nombre = req.body.Fakepon || '';
-    const imagen = req.body.imagen || '';
-    // const ataques = req.body.ataques || [];
-    const vida = req.body.vida || 100;
-    const fakepon = new Fakepon(nombre, imagen, vida);
-    const jugadorIndex = jugadores.findIndex((jugador) => jugador.id === jugadorId);
-    if (jugadorIndex >= 0) {
-        jugadores[jugadorIndex].asiganarFakepon(fakepon);
+app.post("/mokepon/:jugadorId", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const { Fakepon, imagen, vida, ataques } = req.body;
+
+    const jugador = jugadores.find(j => j.id === jugadorId);
+    if (jugador) {
+        jugador.asignarFakepon({ nombre: Fakepon, imagen, vida, ataques });
     }
-    console.log(jugadores);
-    console.log(jugadorId);
-    res.end()
+    res.end();
 });
 
+app.post("/fakepon/:jugadorId/posicion", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const { x, y } = req.body;
 
-app.listen(8080, () => {
-    console.log('Servidor escuchando en el puerto 8080');
+    const jugador = jugadores.find(j => j.id === jugadorId);
+    if (jugador) {
+        jugador.actualizarPosicion(x, y);
+    }
+
+    const enemigos = jugadores.filter(j => j.id !== jugadorId && j.fakepon);
+
+    res.send({
+        enemigos: enemigos.map(e => ({
+            id: e.id,
+            fakepon: e.fakepon,
+            x: e.x,
+            y: e.y
+        }))
+    });
+});
+
+app.post("/fakepon/:jugadorId/batalla", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const { enemigoId } = req.body;
+
+    const jugador = jugadores.find(j => j.id === jugadorId);
+    const enemigo = jugadores.find(j => j.id === enemigoId);
+
+    if (jugador && enemigo) {
+        jugador.asignarEnemigo(enemigoId);
+        enemigo.asignarEnemigo(jugadorId);
+
+        jugador.empezarBatalla();
+        enemigo.empezarBatalla();
+    }
+
+    res.end();
+});
+
+app.get("/fakepon/:jugadorId/estado", (req, res) => {
+    const jugadorId = req.params.jugadorId;
+    const jugador = jugadores.find(j => j.id === jugadorId);
+
+    if (jugador) {
+        const enemigo = jugadores.find(j => j.id === jugador.enemigoId);
+        res.send({
+            enBatalla: jugador.enBatalla,
+            enemigo: enemigo ? enemigo.fakepon : null
+        });
+    } else {
+        res.send({ enBatalla: false });
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor funcionando en puerto ${PORT}`);
 });
