@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="nombre">
+            <span>Name:</span>
+            <input type="text" id ="name" placeholder="Your Name" autocomplete="name" required/>
+        </label>
+
+        <label for="mail">
+            <span>email:</span>
+            <input type="email" id ="mail" autocomplete="email" required/>
+        </label>
+
+        <label for="land">
+            <span>country:</span>
+            <input type="text" id ="land" autocomplete="country" required/>
+        </label>
+
+        <input list="cursos">
+        <datalist id="cursos">
+            <option value="HTML"></option>
+            <option value="CSS"></option>
+            <option value="JavaScript"></option>
+            <option value="Python"></option>
+            <option value="Java"></option>
+        </datalist>
+
+        <input submit type="submit" value="Send"/>
+        
+        <!-- permite personalizar los botones -->
+        <button>enviar</button>
+
+    </form>
+</body>
+</html>
