@@ -1,0 +1,16 @@
+.block-element {
+    background-color: gold;
+    margin : 10px;
+    padding: 20px
+}
+
+.list {
+    background-color: mediumpurple;
+    text-align: center;
+}
+
+.list li {
+    display: inline-block;
+    margin-left: 40px;
+    padding: 20px;
+}
