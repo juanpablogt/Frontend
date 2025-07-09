@@ -1,0 +1,33 @@
+body {
+    border: 0.3rem solid black;
+}
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
+
+.box {
+    width: 10rem;
+    height: 10rem;
+}
+
+.box1 {
+    background-color: plum;
+}
+.box2 {
+    background-color: lightblue;
+}
+.box3 {
+    background-color: lightgreen;
+}
+.box4 {
+    background-color: lightcoral;
+}
+.box5 {
+    background-color: lightgoldenrodyellow;
+}
+.box6 {
+    background-color: rgb(90, 148, 57);
+}
