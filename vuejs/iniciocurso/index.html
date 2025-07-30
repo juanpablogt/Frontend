@@ -7,7 +7,7 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
-    <div id="app">{{ message }}</div>
+    <div id="app"></div>
     <script>
         Vue.createApp({
             data() {
@@ -15,6 +15,7 @@
                     message: 'Hello, Juan you are in Vue!'
                 };
             },
+            template: `<h1 v-once v-text="message"></h1>`
         }).mount('#app');
     </script>
 </body>
