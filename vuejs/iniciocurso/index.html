@@ -7,15 +7,17 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
-    <div id="app"></div>
+    <div id="app">
+
+    </div>
     <script>
-        Vue.createApp({
+       const vm = Vue.createApp({
             data() {
                 return {
-                    message: 'Hello, Juan you are in Vue!'
+                    img: 'https://www.clipartmax.com/png/middle/184-1844891_picture-of-foghorn-leghorn-cartoon-looney-tunes-gallo-claudio.png'
                 };
             },
-            template: `<h1 v-once v-text="message"></h1>`
+            template: `<img v-bind:src="img" v-bind:alt="img">`
         }).mount('#app');
     </script>
 </body>
