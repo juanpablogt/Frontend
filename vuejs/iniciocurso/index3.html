@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+    <div id="app">
+
+    </div>
+    <script>
+       const vm = Vue.createApp({
+            data() {
+                return {
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    now:new Date()
+
+                };
+            },
+            methods: {
+              
+            },
+            computed: {
+                fullName() {
+                    return this.firstName + ' ' + this.lastName;
+                },
+                today() {
+                    return this.now.toLocaleDateString();
+                }
+            },
+            template: `
+                <div>{{ fullName }}</div>
+                <div>{{ today}}</div>
+            `
+        }).mount('#app');
+    </script>
+</body>
+</html>

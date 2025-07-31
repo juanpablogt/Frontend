@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+    <div id="app">
+
+    </div>
+    <script>
+       const vm = Vue.createApp({
+            data() {
+                return {
+                    text: 'la puerta esta cerrada!',
+                    open: false
+
+                };
+            },
+            watch: {
+                open(value) {
+                    if (value) {
+                        this.text = 'la puerta esta abierta!';
+                    } else {
+                        this.text = 'la puerta esta cerrada!';
+                    }
+                }
+            },
+            computed: {
+                label() {
+                    return this.open ? 'Cerrar' : 'Abrir';
+                }
+            },
+            template: `<div>{{ text }}</div>
+                       <button @click="open = !open">{{ label }}</button>`
+        }).mount('#app');
+    </script>
+</body>
+</html>
