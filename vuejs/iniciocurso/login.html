@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+  <div id="app"></div>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          text: "Login",
+          open: false,
+          username: '',
+          posts: [
+            {
+              title: "Un titulo 1",
+              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            },
+            {
+              title: "Un titulo 2",
+              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            },
+            {
+              title: "Un titulo 3",
+              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            }
+          ]
+        };
+      },
+      watch: {
+        open(value) {
+          if (value) {
+            this.text = "Logout";
+          } else {
+            this.text = "Login";
+            this.username = '';
+          }
+        }
+      },
+      computed: {
+        label() {
+          return this.open ? "Cerrar" : "Abrir";
+        },
+        styles() {
+          return this.open ? ['open'] : ['closed'];
+        }
+      },
+      template: `
+        <div class="container" :class="styles">
+          <h2>{{ text }}</h2>
+          <div v-if="open">
+            <p>Hola, {{ username }}</p>
+            <div class="list">
+              <item 
+                v-for="(item, i) in posts"
+                :key="i"
+                :post="item"
+              ></item>
+            </div>
+          </div>
+          <div v-else>
+            <div>Username:</div>
+            <input type="text" v-model="username" />
+          </div>
+          <button @click="open = !open">
+            <div v-if="!open">Acceder</div>
+            <div v-else>Salir</div>
+          </button>
+        </div>
+      `
+    });
+
+    app.component("item", {
+      props: ["post"],
+      template: `
+        <div class="item">
+          <div class="title">{{ post.title }}</div>
+          <p>{{ post.content }}</p>
+        </div>
+      `
+    });
+
+    app.mount("#app");
+  </script>
+
+  <style>
+    html, body {
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #app, .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    button {
+      margin-top: 24px;
+      border: none;
+      background-color: white;
+      padding: 8px 24px;
+      border-radius: 12px;
+    }
+    .closed {
+      background-color: #eca1a6;
+    }
+    .open {
+      background-color: #b5e7a0;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .item {
+      border: 1px solid black;
+    }
+    .title {
+      font-weight: bold;
+      padding: 8px;
+    }
+  </style>
+</body>
+</html>
