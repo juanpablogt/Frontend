@@ -4,129 +4,94 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
-<body>
+  <title>Vue Login App</title>
   <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
-  <div id="app"></div>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen m-0 font-sans">
+
+  <div id="app" class="h-full w-full"></div>
+
   <script>
     const app = Vue.createApp({
       data() {
         return {
-          text: "Login",
-          open: false,
+          isLoggedIn: false,
           username: '',
           posts: [
-            {
-              title: "Un titulo 1",
-              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            },
-            {
-              title: "Un titulo 2",
-              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            },
-            {
-              title: "Un titulo 3",
-              content: "Un texto Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            }
+            { title: "Título 1", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+            { title: "Título 2", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+            { title: "Título 3", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." }
           ]
         };
       },
-      watch: {
-        open(value) {
-          if (value) {
-            this.text = "Logout";
-          } else {
-            this.text = "Login";
+      computed: {
+        statusText() {
+          return this.isLoggedIn ? "Posts" : "Login";
+        },
+        containerClasses() {
+          return this.isLoggedIn
+            ? "bg-gradient-to-br from-green-300 to-emerald-500"
+            : "bg-gradient-to-br from-pink-300 to-red-500";
+        }
+      },
+      methods: {
+        toggleLogin() {
+          this.isLoggedIn = !this.isLoggedIn;
+          if (!this.isLoggedIn) {
             this.username = '';
           }
         }
       },
-      computed: {
-        label() {
-          return this.open ? "Cerrar" : "Abrir";
-        },
-        styles() {
-          return this.open ? ['open'] : ['closed'];
-        }
-      },
       template: `
-        <div class="container" :class="styles">
-          <h2>{{ text }}</h2>
-          <div v-if="open">
-            <p>Hola, {{ username }}</p>
-            <div class="list">
-              <item 
-                v-for="(item, i) in posts"
-                :key="i"
-                :post="item"
-              ></item>
+        <div :class="containerClasses" class="flex flex-col items-center justify-center h-full px-4">
+          <div class="bg-white bg-opacity-90 rounded-2xl shadow-xl p-8 w-full max-w-md transition-all">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">{{ statusText }}</h2>
+
+            <div v-if="isLoggedIn">
+              <p class="text-center mb-4 text-lg text-gray-700">Hola, <span class="font-semibold">{{ username }}</span></p>
+              <div class="flex flex-col gap-4 mt-4">
+                <post-item 
+                  v-for="(item, index) in posts"
+                  :key="index"
+                  :post="item"
+                ></post-item>
+              </div>
             </div>
+
+            <div v-else class="flex flex-col gap-2">
+              <label for="username" class="text-sm text-gray-700">Username:</label>
+              <input
+                id="username"
+                type="text"
+                v-model="username"
+                placeholder="Ingrese su nombre"
+                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+
+            <button
+              @click="toggleLogin"
+              class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg shadow-md transition duration-200"
+            >
+              {{ isLoggedIn ? 'Salir' : 'Acceder' }}
+            </button>
           </div>
-          <div v-else>
-            <div>Username:</div>
-            <input type="text" v-model="username" />
-          </div>
-          <button @click="open = !open">
-            <div v-if="!open">Acceder</div>
-            <div v-else>Salir</div>
-          </button>
         </div>
       `
     });
 
-    app.component("item", {
+    app.component("post-item", {
       props: ["post"],
       template: `
-        <div class="item">
-          <div class="title">{{ post.title }}</div>
-          <p>{{ post.content }}</p>
+        <div class="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+          <div class="text-lg font-semibold text-gray-800 mb-2">{{ post.title }}</div>
+          <p class="text-gray-600">{{ post.content }}</p>
         </div>
       `
     });
 
     app.mount("#app");
   </script>
-
-  <style>
-    html, body {
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    #app, .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-    }
-    button {
-      margin-top: 24px;
-      border: none;
-      background-color: white;
-      padding: 8px 24px;
-      border-radius: 12px;
-    }
-    .closed {
-      background-color: #eca1a6;
-    }
-    .open {
-      background-color: #b5e7a0;
-    }
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .item {
-      border: 1px solid black;
-    }
-    .title {
-      font-weight: bold;
-      padding: 8px;
-    }
-  </style>
 </body>
 </html>

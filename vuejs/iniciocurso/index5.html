@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                   Items: ["uno", "dos", "tres"]
+                };
+            },
+            template:
+                `<ul>
+                    <v-item v-for="item in Items" v-bind:text="item"></v-item>
+                </ul>
+            `
+        });
+        app.component("v-item", {
+            props:{
+                text: String
+            },
+            template: `
+                <li>
+                {{ text }}
+                </li>
+            `
+        });
+        const vm = app.mount('#app');
+    </script>
+</body>
+</html>
