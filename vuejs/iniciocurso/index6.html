@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vue Input Clean</title>
+  <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          text: "Hello World"
+        };
+      },
+      template: `
+        <div>
+          <p>{{ text }}</p>
+          <v-input :value="text" @update:value="text = $event" />
+        </div>
+      `
+    });
+
+    app.component("v-input", {
+      props: ['value'],
+      emits: ['update:value'],
+      template: `
+        <input type="text" :value="value" @input="$emit('update:value', $event.target.value)" />
+      `
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
