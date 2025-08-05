@@ -1,19 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <component :is="componente"> </component>
+  <button @click="show = !show">Menu</button>
+  <transition name="fade">
+    <MenuApp v-show="show" />
+  </transition>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import MenuApp from "./components/MenuApp.vue";
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: { MenuApp },
   data() {
     return {
-      componente: "HelloWorld",
+      show: false,
     };
   },
 };
@@ -27,5 +26,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active,
+.fade-enter-active {
+  transition: opacity 0.5s ease;
 }
 </style>
