@@ -3,13 +3,17 @@
   <transition name="fade">
     <MenuApp v-show="show" />
   </transition>
+  <div>
+    <Modal />
+  </div>
 </template>
 
 <script>
 import MenuApp from "./components/MenuApp.vue";
+import Modal from "./components/Modal.vue";
 export default {
   name: "App",
-  components: { MenuApp },
+  components: { MenuApp, Modal },
   data() {
     return {
       show: false,
