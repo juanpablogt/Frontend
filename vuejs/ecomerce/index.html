@@ -10,18 +10,14 @@
     <div id="app">
         <header>
             <h3>My Shop</h3>
-            <button class="cart">carrito (0)</button>
-            <div class="cart-content">
-                <div class="cart-content-product">
+            <button class="cart">carro (0)</button>
+            <div class="cart-content" v-show="carOpen">
+                <div class="cart-content-product" v-for="(product, index) in cart" :key="product.name"
+                :class="{'bg-gray':index & 1}">
                     <img v-bind:src="product.images[0].image" :alt="product.name.toUpperCase()"/>
                     <span>
-                        {{ product.name }} -
-                        $ {{ new Intl.NumberFormat("es-CO").format(product.price) }}
+                        {{ product.name }} - $ {{ new Intl.NumberFormat("es-CO").format(product.price) }}
                     </span>
-                </div>
-                <div class="cart-content-product">
-                    <img v-bind:src="product.images[1].image" alt="product.name">
-                    <span>{{product.name}} - $ {{new Intl.NumberFormat("es-CO").format(product.price)}}</span>
                 </div>
             </div>
         </header>
@@ -29,13 +25,12 @@
         <main>
             <section class="product">
                 <div class="product-thumbnails">
-                    <div class="thumb" 
-                    :class="{ active: activeImage == 0}"
-                    :style="{ backgroundImage: 'url(' + product.images[0].thumbnail + ')' }"
-                    ></div>
-                    <div class="thumb" 
-                    :class="{ active: activeImage == 1}" 
-                    :style="{ backgroundImage: 'url(' + product.images[1].thumbnail + ')' }"
+                    <div 
+                    v-for="(image, index) in product.images"
+                    :key="image.thumbnail"
+                    class="thumb" 
+                    :class="{ active: activeImage == index}"
+                    :style="{ backgroundImage: 'url(' + product.images[index].thumbnail + ')' }"
                     ></div>
                 </div>
                 <div class="product-image">
@@ -45,15 +40,16 @@
     
             <section class="description">
                 <h4>{{ product.name.toUpperCase() }} {{ product.stock == 0 ? "😵‍💫" : "😎"}}</h4>
-                <span class="badge new">Nuevo</span>
-                <span class="badge new">Oferta</span>
-                <p class="description-status"></p>
+                <span class="badge new" v-if="product.new">Nuevo</span>
+                <span class="badge new" v-if="product.offer">Oferta</span>
+                <p class="description-status" v-if="product.stock <= 3">¡Últimas unidades!</p>
                 <p class="description-price">$ {{ new Intl.NumberFormat("es-CO").format(product.price) }}</p>
                 <p class="description-content"></p>
                 <div class="discount">
                     <span>Código de Descuento</span>
                     <input type="text" placeholder="Ingrese su código">
                 </div>
+                <button :disabled="product.stock == 0">Agregar al carrito</button>
             </section>
         </main>
     </div>
@@ -68,7 +64,7 @@
                     product: {
                         name: 'Camara',
                         price: 500000,
-                        stock: 2,
+                        stock: 0,
                         content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, cumque.',
                     images: [
                         {
@@ -79,9 +75,69 @@
                         image: './images/camara-2.jpg',
                         thumbnail: './images/camara-2-thumb.jpg',
                         }
-                    ]
+                    ],
+                    new: true,
+                    offer: false,
                 },
+                carOpen: true,
                 activeImage: 0,
+                cart: [
+                    {
+                        name: 'Camara',
+                        price: 500000,
+                        stock: 0,
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, cumque.',
+                        images: [
+                            {
+                                image: './images/camara.jpg',
+                                thumbnail: './images/camara-thumb.jpg',
+                            },
+                            {
+                                image: './images/camara-2.jpg',
+                                thumbnail: './images/camara-2-thumb.jpg',
+                            }
+                        ],
+                        new: true,
+                        offer: false,
+                    },
+                    {
+                        name: 'Camara 2',
+                        price: 600000,
+                        stock: 5,
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, cumque.',
+                        images: [
+                            {
+                                image: './images/camara-2.jpg',
+                                thumbnail: './images/camara-2-thumb.jpg',
+                            },
+                            {
+                                image: './images/camara.jpg',
+                                thumbnail: './images/camara-thumb.jpg',
+                            }
+                        ],
+                        new: true,
+                        offer: true,
+                    },
+                    {
+                        name: 'Camara',
+                        price: 700000,
+                        stock: 10,
+                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, cumque.',
+                        images: [
+                            {
+                                image: './images/camara.jpg',
+                                thumbnail: './images/camara-thumb.jpg',
+                            },
+                            {
+                                image: './images/camara.jpg',
+                                thumbnail: './images/camara-thumb.jpg',
+                            }
+                        ],
+                        new: false,
+                        offer: false,
+                    }
+                    
+                ],
             }
         }
     });             
