@@ -10,7 +10,7 @@
     <div id="app">
         <header>
             <h3>My Shop</h3>
-            <button class="cart">carro (0)</button>
+            <button class="cart" v-on:click="carOpen = !carOpen">carro (0)</button>
             <div class="cart-content" v-show="carOpen">
                 <div class="cart-content-product" v-for="(product, index) in cart" :key="product.name"
                 :class="{'bg-gray':index & 1}">
@@ -31,10 +31,11 @@
                     class="thumb" 
                     :class="{ active: activeImage == index}"
                     :style="{ backgroundImage: 'url(' + product.images[index].thumbnail + ')' }"
+                    @click="activeImage = index"
                     ></div>
                 </div>
                 <div class="product-image">
-                    <img src="" alt="">
+                    <img :src="product.images[activeImage].image" alt="product.name">
                 </div>
             </section>
     
@@ -47,9 +48,13 @@
                 <p class="description-content"></p>
                 <div class="discount">
                     <span>Código de Descuento</span>
-                    <input type="text" placeholder="Ingrese su código">
+                    <input 
+                        type="text" 
+                        placeholder="Ingrese su código"
+                        @keyup.enter="product.price *= 50/100"
+                    />
                 </div>
-                <button :disabled="product.stock == 0">Agregar al carrito</button>
+                <button :disabled="product.stock == 0" @click="product.stock -=1">Agregar al carrito</button>
             </section>
         </main>
     </div>
@@ -64,7 +69,7 @@
                     product: {
                         name: 'Camara',
                         price: 500000,
-                        stock: 0,
+                        stock: 8,
                         content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, cumque.',
                     images: [
                         {
